@@ -1,0 +1,10 @@
+# папки
+node_modules
+dist
+build
+.vscode
+
+# файлы
+*.min.js
+*.min.css
+package-lock.json
