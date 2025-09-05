@@ -3,13 +3,8 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import "./header.css";
 import "../search-input/searchInput.css";
+import { NAV_ITEMS } from "@/constants/constants";
 
-const NAV_ITEMS = [
-  { name: "home", labelProp: "home", path: "/" },
-  { name: "movie", labelProp: "movie", path: "/movies" },
-  { name: "serial", labelProp: "serial", path: "/serial" },
-  { name: "favorites", labelProp: "favorites", path: "/favorites" },
-];
 
 export const Header = (props) => {
   const location = useLocation();
@@ -26,7 +21,7 @@ export const Header = (props) => {
   // Синхронизируем активный элемент с текущим маршрутом
   useEffect(() => {
     setActiveItem(getActiveItemFromPath(location.pathname));
-  }, [location.pathname]);
+  }, [location.pathname]);  // если location.pathname изменится, то вызовется setActiveItem
 
   const handleNavClick = (name, path) => {
     setActiveItem(name);

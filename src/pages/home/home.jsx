@@ -4,6 +4,6 @@
 export const Home = () => {
 
     return (
-        <h1>Wellkom!</h1>
+        <h1>Welcome!</h1>
     )
 }
