@@ -1,0 +1,286 @@
+:root {
+  /* Цвета */
+  --color-bg-dark: rgba(0, 0, 0, 0.8);
+  --color-bg-darker: rgba(0, 0, 0, 0.6);
+  --color-bg-black-transparent: rgba(0, 0, 0, 0.3);
+  --color-primary: rgb(220, 20, 60); /* #dc143c — кинематографический красный */
+  --color-primary-light: rgba(220, 20, 60, 0.2);
+  --color-primary-medium: rgba(220, 20, 60, 0.3);
+  --color-primary-hover: rgba(220, 20, 60, 0.6);
+  --color-text: #ffffff;
+  --color-text-muted: rgba(255, 255, 255, 0.8);
+  --color-text-placeholder: rgba(255, 255, 255, 0.3);
+  --color-type-bg: rgba(255, 255, 255, 0.1);
+  --color-type-border: rgba(255, 255, 255, 0.2);
+
+  /* Размеры */
+  --border-radius-card: 12px;
+  --border-radius-tag: 4px;
+  --poster-height: 320px;
+  --card-min-height: 400px;
+  --padding-card: 1.5rem;
+  --gap-card: 0.8rem;
+  --gap-info: 0.5rem;
+
+  /* Эффекты */
+  --transition-base: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --blur-backdrop: blur(10px);
+  --scale-hover: scale(1.02);
+  --lift-hover: translateY(-8px);
+  --image-scale-hover: scale(1.1);
+
+  /* Фильтры изображений */
+  --filter-poster: brightness(0.9) contrast(1.1);
+  --filter-poster-hover: brightness(1) contrast(1.2);
+  --filter-placeholder: brightness(0.7);
+
+  /* Тени */
+  --shadow-base: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(220, 20, 60, 0.1);
+  --shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 30px rgba(220, 20, 60, 0.3);
+
+  /*  Шрифты */
+  --font-mono: 'Courier New', monospace;
+  --font-size-title: 1.2rem;
+  --font-size-info: 0.9rem;
+  --font-size-tag: 0.8rem;
+  --letter-spacing-title: 0.5px;
+  --letter-spacing-info: 0.3px;
+
+  /*  Скелетон */
+  --skeleton-animation: 1.5s ease-in-out infinite;
+  --skeleton-bg-gradient: linear-gradient(90deg, rgba(220, 20, 60, 0.1) 25%, rgba(220, 20, 60, 0.2) 50%, rgba(220, 20, 60, 0.1) 75%);
+  --skeleton-bg-gradient-text: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 75%);
+  --skeleton-bg-gradient-subtle: linear-gradient(90deg, rgba(255, 255, 255, 0.05) 25%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.05) 75%);
+}
+
+.movie-card {
+  position: relative;
+  background: var(--color-bg-dark);
+  border: 2px solid var(--color-primary-light);
+  border-radius: var(--border-radius-card);
+  overflow: hidden;
+  transition: all var(--transition-base);
+  backdrop-filter: var(--blur-backdrop);
+  box-shadow: var(--shadow-base);
+  cursor: pointer;
+  min-height: var(--card-min-height);
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-card:hover {
+  transform: var(--lift-hover) var(--scale-hover);
+  border-color: var(--color-primary-hover);
+  box-shadow: var(--shadow-hover);
+}
+
+.movie-card__poster {
+  position: relative;
+  width: 100%;
+  height: var(--poster-height);
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--color-primary-light), var(--color-bg-black-transparent));
+}
+
+.movie-card__poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform var(--transition-base), opacity 0.3s ease;
+  filter: var(--filter-poster);
+  background-color: var(--color-bg-black-transparent);
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.movie-card:hover .movie-card__poster img {
+  transform: var(--image-scale-hover);
+  filter: var(--filter-poster-hover);
+}
+
+/* Стили для placeholder-ов */
+.movie-card__poster img[src*="placeholder"],
+.movie-card__poster img[src*="N/A"],
+.movie-card__poster img[src*="image/svg"] {
+  object-fit: contain;
+  background: linear-gradient(135deg, var(--color-primary-light), var(--color-bg-dark));
+  filter: var(--filter-placeholder);
+  padding: 1rem;
+}
+
+/* Градиентная затемняющая накладка */
+.movie-card__poster::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, transparent 0%, transparent 60%, var(--color-bg-dark) 100%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.movie-card:hover .movie-card__poster::after {
+  opacity: 1;
+}
+
+/* Контент карточки */
+.movie-card__content {
+  padding: var(--padding-card);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-card);
+  background: var(--color-bg-darker);
+}
+
+/* Заголовок */
+.movie-card__title {
+  font-size: var(--font-size-title);
+  font-weight: 700;
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-title);
+  line-height: 1.3;
+  margin: 0;
+  text-shadow: 0 0 10px var(--color-text-placeholder);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Информация */
+.movie-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-info);
+  margin-top: auto;
+}
+
+.movie-card__info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--font-size-info);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-info);
+}
+
+.movie-card__info-label {
+  color: var(--color-primary-medium);
+  font-weight: 600;
+  min-width: 60px;
+}
+
+/* Теги */
+.movie-card__year {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--border-radius-tag);
+  font-size: var(--font-size-tag);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-title);
+  border: 1px solid var(--color-primary-medium);
+  align-self: flex-start;
+}
+
+.movie-card__type {
+  background: var(--color-type-bg);
+  color: var(--color-text-muted);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--border-radius-tag);
+  font-size: var(--font-size-tag);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-info);
+  border: 1px solid var(--color-type-border);
+  align-self: flex-start;
+}
+
+/* 💀 Скелетон */
+.movie-card--skeleton {
+  background: var(--color-bg-darker);
+  border: 2px solid rgba(220, 20, 60, 0.1);
+  animation: skeleton-pulse var(--skeleton-animation);
+}
+
+.movie-card--skeleton .movie-card__poster {
+  background: var(--skeleton-bg-gradient);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer var(--skeleton-animation);
+}
+
+.movie-card--skeleton .movie-card__title {
+  background: var(--skeleton-bg-gradient-text);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer var(--skeleton-animation);
+  height: 1.5rem;
+  border-radius: 4px;
+  color: transparent;
+}
+
+.movie-card--skeleton .movie-card__info-item {
+  background: var(--skeleton-bg-gradient-subtle);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer var(--skeleton-animation);
+  height: 1rem;
+  border-radius: 3px;
+  color: transparent;
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* 🖼️ Оптимизации */
+.movie-card__poster img[loading="lazy"] {
+  will-change: transform, opacity;
+}
+
+.movie-card__poster img[src*=".jpg"],
+.movie-card__poster img[src*=".jpeg"],
+.movie-card__poster img[src*=".png"],
+.movie-card__poster img[src*=".webp"] {
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* 📱 Адаптивность */
+@media (max-width: 768px) {
+  :root {
+    --poster-height: 200px;
+    --card-min-height: 350px;
+    --padding-card: 1rem;
+    --gap-card: 0.6rem;
+    --font-size-title: 1rem;
+    --font-size-info: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --poster-height: 180px;
+    --card-min-height: 300px;
+    --padding-card: 0.8rem;
+    --gap-card: 0.5rem;
+    --font-size-title: 0.9rem;
+    --font-size-info: 0.75rem;
+  }
+}

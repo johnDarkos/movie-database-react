@@ -4,13 +4,17 @@ export const useStorageMovies = create((set, get) => ({
   movies: [],
   favorites: [],
   searchMovies: '',
-
+  isLoading: false,
 
   searchMoviesByName: (term) => set({ searchMovies: term }),
 
+  // Установка состояния загрузки
+  setLoading: (loading) => set({ isLoading: loading }),
+
   // Добавление фильмов
-  updateDataMovies: (newData) => set((state) => ({
-    movies: [...state.movies, ...newData]
+  updateDataMovies: ( moviesData ) => set((state) => ({
+    movies: Array.from(new Map(moviesData.map(movie => [movie.imdbID, movie])).values()),
+    isLoading: false
   })),
   
   // Добавление одного фильма в избранное
@@ -34,6 +38,12 @@ export const useStorageMovies = create((set, get) => ({
     movies: [],
     favorites: []
   }),
+
+  getMovies: () => {
+    const { movies } = get()
+
+    return movies
+  }
   
 
 }));

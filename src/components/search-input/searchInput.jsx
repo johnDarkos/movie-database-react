@@ -1,9 +1,9 @@
 import "@/components/search-input/searchInput.css";
 import { useStorageMovies } from "@/store/useStorageMovies";
-import { getMovieByName } from "@/api/getMovieByName";
-import { useOmdbMoviesApi } from "@/api/OMDB/useOmdbApi";
-import debounce from "@/utils/debounce";
-import { useCallback } from "react";
+import { getMovieByName } from "@/services/api/getMovieByName";
+import { useOmdbMoviesApi } from "@/services/api/OMDB/useOmdbApi";
+import { Button } from "@/components/button/button";
+import { useState } from "react";
 
 /**
  * Компонент SearchInput для поиска фильмов
@@ -14,21 +14,35 @@ import { useCallback } from "react";
 
 
 export const SearchInput = (props) => {
-  const { searchMoviesByName } = useStorageMovies();
+  const { searchMoviesByName, updateDataMovies, getMovies, clearMovies, setLoading, isLoading } = useStorageMovies();
+  const [searchValue, setSearchValue ] = useState("");
 
-  // Оборачиваем handleSearch в debounce, чтобы не было лишних запросов
-  const debouncedSearch = useCallback(
-    debounce(async (value) => {
-      searchMoviesByName(value);
-      try {
-        const response = await getMovieByName(useOmdbMoviesApi, value);
-        console.log(response);
-      } catch (err) {
-        console.error("Ошибка поиска:", err);
-      }
-    }, 500),
-    [searchMoviesByName]
-  );
+  // Функция для обработки поиска
+  const handleSearch = async () => {
+    if (!searchValue.trim()) return;
+    
+    clearMovies();
+    setLoading(true);
+    searchMoviesByName(searchValue);
+    
+    try {
+      const response = await getMovieByName(useOmdbMoviesApi, searchValue);
+      const movies = response.Search || [];
+      updateDataMovies(movies);
+      console.log(response);
+      console.log(getMovies());
+    } catch (err) {
+      console.error("Ошибка поиска:", err);
+      setLoading(false);
+    }
+  };
+
+  // Обработчик нажатия Enter в инпуте
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
   return (
     <div className="search__movie__container">
@@ -36,7 +50,14 @@ export const SearchInput = (props) => {
         className="search__input__movie"
         type="search"
         placeholder={props.placeholder}
-        onChange={(e) => debouncedSearch(e.target.value)}
+        value={searchValue}
+        onChange={(e) => setSearchValue(e.target.value)}
+        onKeyPress={handleKeyPress}
+      />
+      <Button 
+        text={isLoading ? "Searching..." : "Search"}
+        onClick={handleSearch}
+        disabled={isLoading || !searchValue.trim()}
       />
     </div>
   );

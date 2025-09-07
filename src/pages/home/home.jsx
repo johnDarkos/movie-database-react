@@ -4,6 +4,8 @@
 export const Home = () => {
 
     return (
-        <h1>Welcome!</h1>
+        <>
+         <h1 className="home__title">Welcome!</h1>
+        </>
     )
 }

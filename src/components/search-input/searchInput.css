@@ -2,6 +2,8 @@
     display: flex;
     align-items: center;
     position: relative;
+    gap: 0;
+    width: fit-content;
 }
 
 .search__input__movie {
@@ -43,8 +45,9 @@
         inset 0 2px 4px rgba(0, 0, 0, 0.7),
         0 6px 25px rgba(0, 0, 0, 0.4),
         0 0 20px rgba(220, 20, 60, 0.4);
-    transform: translateY(-2px) scale(1.02);
+    transform: translateY(-2px);
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    border-right: none;
 }
 
 .search__input__movie:hover {
@@ -74,6 +77,8 @@
         width: 100%;
         margin-left: 0;
         order: 1;
+        flex-direction: column;
+        gap: 0.5rem;
     }
 
     .search__input__movie {
@@ -82,11 +87,13 @@
         font-size: 0.85rem;
         letter-spacing: 0.2px;
         height: 40px;
+        border-right: 2px solid rgba(220, 20, 60, 0.3);
     }
 
     .search__input__movie:focus {
         width: 100%;
         max-width: 300px;
+        border-right: 2px solid #dc143c;
     }
 }
 
