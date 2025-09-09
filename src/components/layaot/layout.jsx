@@ -2,10 +2,12 @@
 
 
 
+import styles from "./layout.module.css";
+
 export const Layout = ({children}) => {
 
     return (
-        <div className="layout"> 
+        <div className={styles.layout}>
             { children }
         </div>
     )

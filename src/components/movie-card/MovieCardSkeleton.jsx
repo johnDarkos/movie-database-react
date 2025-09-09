@@ -1,4 +1,4 @@
-import "./MovieCard.css";
+import styles from "./MovieCard.module.css";
 
 /**
  * Компонент скелетона для MovieCard
@@ -11,19 +11,19 @@ export const MovieCardSkeleton = ({ count = 6, className = "" }) => {
   return (
     <>
       {Array.from({ length: count }, (_, index) => (
-        <div key={index} className={`movie-card movie-card--skeleton ${className}`}>
-          <div className="movie-card__poster">
+        <div key={index} className={`${styles.movieCard} ${styles.movieCardSkeleton} ${className}`}>
+          <div className={styles.movieCardPoster}>
             {/* Скелетон постера */}
           </div>
-          <div className="movie-card__content">
-            <h3 className="movie-card__title">
+          <div className={styles.movieCardContent}>
+            <h3 className={styles.movieCardTitle}>
               {/* Скелетон заголовка */}
             </h3>
-            <div className="movie-card__info">
-              <div className="movie-card__info-item">
+            <div className={styles.movieCardInfo}>
+              <div className={styles.movieCardInfoItem}>
                 {/* Скелетон информации */}
               </div>
-              <div className="movie-card__info-item">
+              <div className={styles.movieCardInfoItem}>
                 {/* Скелетон информации */}
               </div>
             </div>

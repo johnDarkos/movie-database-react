@@ -1,4 +1,4 @@
-import "@/components/search-input/searchInput.css";
+import styles from "./searchInput.module.css";
 import { useStorageMovies } from "@/store/useStorageMovies";
 import { getMovieByName } from "@/services/api/getMovieByName";
 import { useOmdbMoviesApi } from "@/services/api/OMDB/useOmdbApi";
@@ -26,7 +26,7 @@ export const SearchInput = (props) => {
     searchMoviesByName(searchValue);
     
     try {
-      const response = await getMovieByName(useOmdbMoviesApi, searchValue);
+      const response = await getMovieByName(useOmdbMoviesApi, searchValue, { type: 'movie', plot: 'short' });
       const movies = response.Search || [];
       updateDataMovies(movies);
       console.log(response);
@@ -45,9 +45,9 @@ export const SearchInput = (props) => {
   };
 
   return (
-    <div className="search__movie__container">
+    <div className={styles.searchMovieContainer}>
       <input
-        className="search__input__movie"
+        className={styles.searchInputMovie}
         type="search"
         placeholder={props.placeholder}
         value={searchValue}

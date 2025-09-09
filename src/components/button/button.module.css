@@ -1,4 +1,4 @@
-.search__button {
+.searchButton {
     height: 45px;
     padding: 0 1.5rem;
     border: 2px solid rgba(220, 20, 60, 0.3);
@@ -61,7 +61,7 @@
 }
 
 /* Синхронизация с фокусом инпута */
-.search__movie__container:focus-within .search__button {
+:global(.searchMovieContainer):focus-within .searchButton {
     transform: translateY(-2px);
     border-color: #dc143c;
     border-left: none;
@@ -75,7 +75,7 @@
 
 /* Responsive design */
 @media (max-width: 768px) {
-    .search__button {
+    .searchButton {
         font-size: 0.9rem;
         letter-spacing: 0.3px;
         padding: 0 1rem;
@@ -84,7 +84,7 @@
 }
 
 @media (max-width: 480px) {
-    .search__button {
+    .searchButton {
         font-size: 0.85rem;
         letter-spacing: 0.2px;
         height: 40px;
@@ -100,7 +100,7 @@
         border-left: 2px solid #dc143c;
     }
 
-    .search__movie__container:focus-within .search__button {
+    :global(.searchMovieContainer):focus-within .searchButton {
         border-left: 2px solid #dc143c;
     }
 }

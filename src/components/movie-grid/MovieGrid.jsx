@@ -1,6 +1,6 @@
 
 
-import "./MovieGrid.css";
+import styles from "./MovieGrid.module.css";
 
 /**
  * Компонент MovieGrid для отображения сетки карточек фильмов
@@ -10,7 +10,7 @@ import "./MovieGrid.css";
  */
 export const MovieGrid = ({ children }) => {
     return (
-        <div className="movie__grid">
+        <div className={styles.movieGrid}>
             {children}
         </div>
     );

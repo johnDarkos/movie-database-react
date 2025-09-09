@@ -1,0 +1,16 @@
+.homeTitle {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #fff;
+  margin: 2rem 0;
+  text-shadow: 0 0 20px rgba(220, 20, 60, 0.5);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .homeTitle {
+    font-size: 2rem;
+    margin: 1rem 0;
+  }
+}

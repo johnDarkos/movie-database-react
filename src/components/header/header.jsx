@@ -1,8 +1,7 @@
 import { SearchInput } from "../search-input/searchInput";
 import { useState, useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import "./header.css";
-import "../search-input/searchInput.css";
+import styles from "./header.module.css";
 import { NAV_ITEMS } from "@/constants/constants";
 
 
@@ -29,8 +28,8 @@ export const Header = (props) => {
   };
 
   return (
-    <header className="header fade-in">
-      <nav className="header_navigation slide-in-left">
+    <header className={`${styles.header} fade-in`}>
+      <nav className={`${styles.headerNavigation} slide-in-left`}>
         {NAV_ITEMS.map((item) => (
           <Link
             key={item.name}
@@ -46,7 +45,7 @@ export const Header = (props) => {
         ))}
       </nav>
 
-      <div className="search-container slide-in-right">
+      <div className={`${styles.searchContainer} slide-in-right`}>
         <SearchInput placeholder="найти фильм" />
       </div>
     </header>

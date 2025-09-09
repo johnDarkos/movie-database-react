@@ -1,0 +1,18 @@
+.layout {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #000 0%, #111 50%, #222 100%);
+  background-attachment: fixed;
+}
+
+.mainContent {
+  padding: 2rem 0;
+  min-height: calc(100vh - 80px); /* Вычитаем высоту header */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .mainContent {
+    padding: 1rem 0;
+    min-height: calc(100vh - 70px);
+  }
+}

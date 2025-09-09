@@ -53,7 +53,7 @@
   --skeleton-bg-gradient-subtle: linear-gradient(90deg, rgba(255, 255, 255, 0.05) 25%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.05) 75%);
 }
 
-.movie-card {
+.movieCard {
   position: relative;
   background: var(--color-bg-dark);
   border: 2px solid var(--color-primary-light);
@@ -68,13 +68,13 @@
   flex-direction: column;
 }
 
-.movie-card:hover {
+.movieCard:hover {
   transform: var(--lift-hover) var(--scale-hover);
   border-color: var(--color-primary-hover);
   box-shadow: var(--shadow-hover);
 }
 
-.movie-card__poster {
+.movieCardPoster {
   position: relative;
   width: 100%;
   height: var(--poster-height);
@@ -82,7 +82,7 @@
   background: linear-gradient(135deg, var(--color-primary-light), var(--color-bg-black-transparent));
 }
 
-.movie-card__poster img {
+.movieCardPoster img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -100,15 +100,15 @@
   }
 }
 
-.movie-card:hover .movie-card__poster img {
+.movieCard:hover .movieCardPoster img {
   transform: var(--image-scale-hover);
   filter: var(--filter-poster-hover);
 }
 
 /* Стили для placeholder-ов */
-.movie-card__poster img[src*="placeholder"],
-.movie-card__poster img[src*="N/A"],
-.movie-card__poster img[src*="image/svg"] {
+.movieCardPoster img[src*="placeholder"],
+.movieCardPoster img[src*="N/A"],
+.movieCardPoster img[src*="image/svg"] {
   object-fit: contain;
   background: linear-gradient(135deg, var(--color-primary-light), var(--color-bg-dark));
   filter: var(--filter-placeholder);
@@ -116,7 +116,7 @@
 }
 
 /* Градиентная затемняющая накладка */
-.movie-card__poster::after {
+.movieCardPoster::after {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -125,12 +125,12 @@
   transition: opacity var(--transition-base);
 }
 
-.movie-card:hover .movie-card__poster::after {
+.movieCard:hover .movieCardPoster::after {
   opacity: 1;
 }
 
 /* Контент карточки */
-.movie-card__content {
+.movieCardContent {
   padding: var(--padding-card);
   flex: 1;
   display: flex;
@@ -140,7 +140,7 @@
 }
 
 /* Заголовок */
-.movie-card__title {
+.movieCardTitle {
   font-size: var(--font-size-title);
   font-weight: 700;
   color: var(--color-text);
@@ -157,14 +157,14 @@
 }
 
 /* Информация */
-.movie-card__info {
+.movieCardInfo {
   display: flex;
   flex-direction: column;
   gap: var(--gap-info);
   margin-top: auto;
 }
 
-.movie-card__info-item {
+.movieCardInfoItem {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -175,14 +175,14 @@
   letter-spacing: var(--letter-spacing-info);
 }
 
-.movie-card__info-label {
+.movieCardInfo-label {
   color: var(--color-primary-medium);
   font-weight: 600;
   min-width: 60px;
 }
 
 /* Теги */
-.movie-card__year {
+.movieCardYear {
   background: var(--color-primary-light);
   color: var(--color-primary);
   padding: 0.2rem 0.6rem;
@@ -195,7 +195,7 @@
   align-self: flex-start;
 }
 
-.movie-card__type {
+.movieCardType {
   background: var(--color-type-bg);
   color: var(--color-text-muted);
   padding: 0.2rem 0.6rem;
@@ -209,19 +209,19 @@
 }
 
 /* 💀 Скелетон */
-.movie-card--skeleton {
+.movieCardSkeleton {
   background: var(--color-bg-darker);
   border: 2px solid rgba(220, 20, 60, 0.1);
   animation: skeleton-pulse var(--skeleton-animation);
 }
 
-.movie-card--skeleton .movie-card__poster {
+.movieCardSkeleton .movieCardPoster {
   background: var(--skeleton-bg-gradient);
   background-size: 200% 100%;
   animation: skeleton-shimmer var(--skeleton-animation);
 }
 
-.movie-card--skeleton .movie-card__title {
+.movieCardSkeleton .movieCardTitle {
   background: var(--skeleton-bg-gradient-text);
   background-size: 200% 100%;
   animation: skeleton-shimmer var(--skeleton-animation);
@@ -230,7 +230,7 @@
   color: transparent;
 }
 
-.movie-card--skeleton .movie-card__info-item {
+.movieCardSkeleton .movieCardInfoItem {
   background: var(--skeleton-bg-gradient-subtle);
   background-size: 200% 100%;
   animation: skeleton-shimmer var(--skeleton-animation);
@@ -250,14 +250,14 @@
 }
 
 /* 🖼️ Оптимизации */
-.movie-card__poster img[loading="lazy"] {
+.movieCardPoster img[loading="lazy"] {
   will-change: transform, opacity;
 }
 
-.movie-card__poster img[src*=".jpg"],
-.movie-card__poster img[src*=".jpeg"],
-.movie-card__poster img[src*=".png"],
-.movie-card__poster img[src*=".webp"] {
+.movieCardPoster img[src*=".jpg"],
+.movieCardPoster img[src*=".jpeg"],
+.movieCardPoster img[src*=".png"],
+.movieCardPoster img[src*=".webp"] {
   object-fit: cover;
   object-position: center top;
 }

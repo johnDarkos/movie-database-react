@@ -1,11 +1,12 @@
 
 
+import styles from "./home.module.css";
 
 export const Home = () => {
 
     return (
         <>
-         <h1 className="home__title">Welcome!</h1>
+         <h1 className={styles.homeTitle}>Welcome!</h1>
         </>
     )
 }

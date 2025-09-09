@@ -1,4 +1,4 @@
-import "./button.css";
+import styles from "./button.module.css";
 
 /**
  * Компонент Button для поиска фильмов
@@ -11,7 +11,7 @@ import "./button.css";
 export const Button = ({ text = "Search", onClick, disabled = false }) => {
   return (
     <button 
-      className="search__button" 
+      className={styles.searchButton} 
       onClick={onClick}
       disabled={disabled}
       type="button"

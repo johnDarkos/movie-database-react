@@ -1,5 +1,6 @@
 import { useState } from "react";
-import "./MovieCard.css";
+import { useNavigate } from "react-router-dom";
+import styles from "./MovieCard.module.css";
 
 /**
  * Компонент отдельной карточки фильма
@@ -15,6 +16,7 @@ import "./MovieCard.css";
 export const MovieCardItem = ({ Title, Year, Type, Poster, imdbID, className = "" }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const navigate = useNavigate();
   
   const handleImageLoad = () => {
     setImageLoaded(true);
@@ -25,9 +27,13 @@ export const MovieCardItem = ({ Title, Year, Type, Poster, imdbID, className = "
     e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDMwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIiBmaWxsPSJyZ2JhKDIyMCwgMjAsIDYwLCAwLjEpIi8+Cjx0ZXh0IHg9IjE1MCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMykiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTQiPk5vIFBvc3RlcjwvdGV4dD4KPC9zdmc+';
   };
 
+  const handleMovieDetails = () => {
+    navigate(`/movie/${imdbID}`);
+  };
+
   return (
-    <div className={`movie-card ${className}`} key={imdbID}>
-      <div className="movie-card__poster">
+    <div className={`${styles.movieCard} ${className}`} key={imdbID} onClick={handleMovieDetails}>
+      <div className={styles.movieCardPoster}>
         <img 
           src={Poster !== 'N/A' ? Poster : 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDMwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIiBmaWxsPSJyZ2JhKDIyMCwgMjAsIDYwLCAwLjEpIi8+Cjx0ZXh0IHg9IjE1MCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMykiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTQiPk5vIFBvc3RlcjwvdGV4dD4KPC9zdmc+'} 
           alt={`Poster for ${Title}`}
@@ -40,16 +46,16 @@ export const MovieCardItem = ({ Title, Year, Type, Poster, imdbID, className = "
           }}
         />
       </div>
-      <div className="movie-card__content">
-        <h3 className="movie-card__title">{Title}</h3>
-        <div className="movie-card__info">
-          <div className="movie-card__info-item">
-            <span className="movie-card__info-label">Year:</span>
-            <span className="movie-card__year">{Year}</span>
+      <div className={styles.movieCardContent}>
+        <h3 className={styles.movieCardTitle}>{Title}</h3>
+        <div className={styles.movieCardInfo}>
+          <div className={styles.movieCardInfoItem}>
+            <span className={styles.movieCardInfoLabel}>Year:</span>
+            <span className={styles.movieCardYear}>{Year}</span>
           </div>
-          <div className="movie-card__info-item">
-            <span className="movie-card__info-label">Type:</span>
-            <span className="movie-card__type">{Type}</span>
+          <div className={styles.movieCardInfoItem}>
+            <span className={styles.movieCardInfoLabel}>Type:</span>
+            <span className={styles.movieCardType}>{Type}</span>
           </div>
         </div>
       </div>

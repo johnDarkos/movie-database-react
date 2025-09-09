@@ -1,7 +1,7 @@
 import useStorageMovies from "@/store/useStorageMovies";
 import { MovieCardItem } from "./MovieCardItem";
 import { MovieCardSkeleton } from "./MovieCardSkeleton.jsx";
-import "./MovieCard.css";
+// CSS модули импортируются в компонентах MovieCardItem и MovieCardSkeleton
 
 /**
  * Компонент MovieCard для отображения карточек фильмов

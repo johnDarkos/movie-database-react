@@ -12,7 +12,7 @@ export const useStorageMovies = create((set, get) => ({
   setLoading: (loading) => set({ isLoading: loading }),
 
   // Добавление фильмов
-  updateDataMovies: ( moviesData ) => set((state) => ({
+  updateDataMovies: ( moviesData ) => set(() => ({
     movies: Array.from(new Map(moviesData.map(movie => [movie.imdbID, movie])).values()),
     isLoading: false
   })),
