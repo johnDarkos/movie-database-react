@@ -1,163 +1,156 @@
 # Movie Database React
 
-Модерное веб-приложение для поиска и просмотра фильмов, построенное на React с использованием OMDB API.
+A modern web application for searching and viewing movies, built with React using the OMDB API.
 
-## 🚀 Особенности
+## 🚀 Features
 
-- **Поиск фильмов**: Быстрый поиск по названию фильма
-- **Детальная информация**: Просмотр подробной информации о фильме
-- **Избранное**: Добавление фильмов в список избранных (сохраняется в localStorage)
-- **Адаптивный дизайн**: Оптимизирован для различных устройств
-- **Быстрая загрузка**: Использование скелетонов во время загрузки данных
-- **Современный стек**: React 19, Vite, TanStack Query
+- **Movie Search**: Fast search by movie title
+- **Detailed Information**: View detailed movie information
+- **Favorites**: Add movies to favorites list (saved in localStorage)
+- **Responsive Design**: Optimized for various devices
+- **Fast Loading**: Skeleton loading during data fetch
+- **Modern Stack**: React 19, Vite, TanStack Query
 
-## 🛠 Технологии
+## 🛠 Technologies
 
 ### Frontend
-- **React 19** - Основная библиотека для создания пользовательского интерфейса
-- **React Router DOM** - Маршрутизация в приложении
-- **Vite** - Быстрый инструмент сборки
-- **Zustand** - Глобальное управление состоянием с персистентностью
+- **React 19** - Main library for building user interfaces
+- **React Router DOM** - Application routing
+- **Vite** - Fast build tool
+- **Zustand** - Global state management with persistence
 
 ### UI/UX
-- **CSS Modules** - Модульные стили
-- **SVG Icons** - Векторные иконки для кнопок
-- **Skeleton Loading** - Скелетоны для улучшения UX при загрузке
+- **CSS Modules** - Modular styles
+- **SVG Icons** - Vector icons for buttons
+- **Skeleton Loading** - Skeletons for better UX during loading
 
 ### API
-- **OMDB API** - Внешний API для получения данных о фильмах
-- **Axios** - HTTP клиент для API запросов
+- **OMDB API** - External API for movie data
+- **Axios** - HTTP client for API requests
 
-### Качество кода
-- **ESLint** - Линтинг кода
-- **Prettier** - Форматирование кода
-- **Husky** - Git хуки для автоматического форматирования
-- **Lint-staged** - Запуск линтера только на измененных файлах
+### Code Quality
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
+- **Husky** - Git hooks for automatic formatting
+- **Lint-staged** - Run linter only on changed files
 
-## 📁 Структура проекта
+## 📁 Project Structure
 
 ```
 src/
-├── components/          # Переиспользуемые компоненты
-│   ├── auth/           # Компоненты аутентификации
-│   ├── button/         # Кнопки различных типов
-│   ├── checkbox/       # Компоненты чекбоксов
-│   ├── header/         # Шапка приложения
-│   ├── layout/         # Макет приложения
-│   ├── movie/          # Компоненты для фильмов
-│   └── search-input/   # Поле поиска
-├── constants/          # Константы приложения
-├── pages/             # Страницы приложения
-│   ├── favorites/     # Страница избранных фильмов
-│   ├── home/          # Главная страница
-│   ├── movieDetails/  # Детали фильма
-│   └── movies/        # Список фильмов
-├── services/          # API сервисы
-│   └── api/           # Конфигурация API
-├── store/             # Глобальное состояние (Zustand)
-├── styles/            # Глобальные стили
-└── utils/             # Вспомогательные функции
+├── components/          # Reusable components
+│   ├── auth/           # Authentication components
+│   ├── button/         # Various button types
+│   ├── checkbox/       # Checkbox components
+│   ├── header/         # Application header
+│   ├── layout/         # Application layout
+│   ├── movie/          # Movie-related components
+│   └── search-input/   # Search input field
+├── constants/          # Application constants
+├── pages/             # Application pages
+│   ├── favorites/     # Favorites page
+│   ├── home/          # Home page
+│   ├── movieDetails/  # Movie details page
+│   └── movies/        # Movies list page
+├── services/          # API services
+│   └── api/           # API configuration
+├── store/             # Global state (Zustand)
+├── styles/            # Global styles
+└── utils/             # Helper functions
 ```
 
-## 🚀 Установка и запуск
+## 🚀 Installation and Setup
 
-### Предварительные требования
+### Prerequisites
 
-- Node.js (версия 16 или выше)
-- npm или yarn
-- Аккаунт на [OMDB API](http://www.omdbapi.com/) для получения API ключа
+- Node.js (version 16 or higher)
+- npm or yarn
+- Account on [OMDB API](http://www.omdbapi.com/) to get API key
 
-### Шаги установки
+### Installation Steps
 
-1. **Клонируйте репозиторий**
+1. **Clone the repository**
    ```bash
    git clone https://github.com/your-username/movie-database-react.git
    cd movie-database-react
    ```
 
-2. **Установите зависимости**
+2. **Install dependencies**
    ```bash
    npm install
    ```
 
-3. **Настройте переменные окружения**
+3. **Configure environment variables**
 
-   Создайте файл `.env` в корне проекта:
+   Create a `.env` file in the project root:
    ```env
    VITE_OMDB_API_URL=http://www.omdbapi.com/
    VITE_OMDB_API_KEY=your_omdb_api_key_here
    ```
 
-   ⚠️ **Важно**: `.env` файл не должен попадать в git репозиторий по соображениям безопасности. Он уже добавлен в `.gitignore`.
-
-   Для удобства других разработчиков, в проекте есть `.env.example` файл с примерными переменными окружения. Скопируйте его в `.env` и заполните реальными значениями.
-
-4. **Запустите приложение в режиме разработки**
+4. **Start the development server**
    ```bash
    npm run dev
    ```
 
-5. **Откройте браузер**
+5. **Open your browser**
 
-   Перейдите по адресу [http://localhost:5173](http://localhost:5173)
+   Navigate to [http://localhost:5173](http://localhost:5173)
 
-## 📜 Доступные скрипты
+## 📜 Available Scripts
 
-- `npm run dev` - Запуск в режиме разработки
-- `npm run build` - Сборка для продакшена
-- `npm run preview` - Предварительный просмотр собранного приложения
-- `npm run lint` - Запуск ESLint для проверки кода
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview the built application
+- `npm run lint` - Run ESLint for code checking
 
-## 🔧 API документация
+## 🔧 API Documentation
 
-Приложение использует [OMDB API](http://www.omdbapi.com/) для получения данных о фильмах.
+The application uses [OMDB API](http://www.omdbapi.com/) to fetch movie data.
 
-### Основные эндпоинты:
-- `?s={movie_title}` - Поиск фильмов по названию
-- `?i={imdb_id}` - Получение детальной информации о фильме
+### Main endpoints:
+- `?s={movie_title}` - Search movies by title
+- `?i={imdb_id}` - Get detailed movie information
 
-## 🎨 Компоненты
+## 🎨 Components
 
-### Основные компоненты:
+### Main components:
 
-- **Header** - Навигационная панель с меню
-- **SearchInput** - Поле поиска с дебаунсом
-- **MovieCard** - Карточка фильма с постером и основной информацией
-- **MovieDetails** - Детальная страница фильма
-- **MovieGrid** - Сетка для отображения фильмов
-- **MovieLike** - Кнопка добавления в избранное
+- **Header** - Navigation bar with menu
+- **SearchInput** - Search field with debounce
+- **MovieCard** - Movie card with poster and basic info
+- **MovieDetails** - Detailed movie page
+- **MovieGrid** - Grid for displaying movies
+- **MovieLike** - Button to add to favorites
 
-## 📱 Функциональность
+## 📱 Functionality
 
-### Поиск фильмов
-- Ввод названия фильма в поле поиска
-- Автоматический поиск с дебаунсом
-- Отображение результатов в виде сетки карточек
+### Movie Search
+- Enter movie title in search field
+- Automatic search with debounce
+- Display results as a grid of cards
 
-### Просмотр деталей
-- Клик по карточке фильма для перехода к деталям
-- Отображение полной информации о фильме
-- Возможность добавления в избранное
+### View Details
+- Click on movie card to view details
+- Display complete movie information
+- Option to add to favorites
 
-### Избранное
-- Добавление/удаление фильмов из избранного
-- Сохранение в localStorage
-- Отдельная страница для просмотра избранных фильмов
+### Favorites
+- Add/remove movies from favorites
+- Saved in localStorage
+- Separate page to view favorite movies
 
-## 🤝 Вклад в проект
+## 🤝 Contributing
 
-1. Форкните проект
-2. Создайте ветку для вашей фичи (`git checkout -b feature/AmazingFeature`)
-3. Зафиксируйте изменения (`git commit -m 'Add some AmazingFeature'`)
-4. Отправьте изменения в ветку (`git push origin feature/AmazingFeature`)
-5. Создайте Pull Request
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Create a Pull Request
 
+## 🙏 Acknowledgments
 
+- [OMDB API](http://www.omdbapi.com/) for providing movie data
+- React community for excellent documentation and tools
 
-## 🙏 Благодарности
-
-- [OMDB API](http://www.omdbapi.com/) за предоставление данных о фильмах
-- React сообщество за отличную документацию и инструменты
-
-
-**Примечание**: Для получения API ключа OMDB зарегистрируйтесь на их сайте и добавьте ключ в переменные окружения.
+**Note**: To get an OMDB API key, register on their website and add the key to environment variables.
