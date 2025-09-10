@@ -1,0 +1,185 @@
+:root {
+  /* Цвета для избранных фильмов */
+  --favorites-bg-gradient: linear-gradient(135deg, rgba(220, 20, 60, 0.1) 0%, rgba(0, 0, 0, 0.9) 50%, rgba(220, 20, 60, 0.05) 100%);
+  --favorites-empty-bg: linear-gradient(135deg, rgba(220, 20, 60, 0.05), rgba(0, 0, 0, 0.8));
+  --favorites-text-accent: rgba(220, 20, 60, 0.8);
+  --favorites-icon-color: rgba(220, 20, 60, 0.6);
+
+  /* Размеры */
+  --favorites-padding: 2rem;
+  --favorites-gap: 2rem;
+  --favorites-min-height: 50vh;
+  --favorites-empty-padding: 4rem;
+
+  /* Анимации */
+  --favorites-fade-in: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  --favorites-stagger-delay: 0.1s;
+}
+
+/* Основной контейнер */
+.movieFavorites {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--favorites-gap);
+  padding: var(--favorites-padding);
+  min-height: var(--favorites-min-height);
+  background: var(--favorites-bg-gradient);
+  animation: fadeIn var(--favorites-fade-in);
+  position: relative;
+}
+
+/* Пустое состояние */
+.movieFavorites:empty::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  background: var(--favorites-empty-bg);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.movieFavorites:empty::after {
+  content: 'No favorite movies yet';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--favorites-text-accent);
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 1;
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 0.4;
+  }
+}
+
+/* Стили для карточек в избранном */
+.movieFavorites .movieCard {
+  animation: fadeIn var(--favorites-fade-in);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.movieFavorites .movieCard:nth-child(1) { animation-delay: 0s; }
+.movieFavorites .movieCard:nth-child(2) { animation-delay: var(--favorites-stagger-delay); }
+.movieFavorites .movieCard:nth-child(3) { animation-delay: calc(var(--favorites-stagger-delay) * 2); }
+.movieFavorites .movieCard:nth-child(4) { animation-delay: calc(var(--favorites-stagger-delay) * 3); }
+.movieFavorites .movieCard:nth-child(5) { animation-delay: calc(var(--favorites-stagger-delay) * 4); }
+.movieFavorites .movieCard:nth-child(6) { animation-delay: calc(var(--favorites-stagger-delay) * 5); }
+
+/* Особые эффекты для избранных фильмов */
+.movieFavorites .movieCard {
+  border-color: rgba(220, 20, 60, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(220, 20, 60, 0.15);
+}
+
+.movieFavorites .movieCard:hover {
+  border-color: rgba(220, 20, 60, 0.8);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 30px rgba(220, 20, 60, 0.4);
+  transform: translateY(-12px) scale(1.03);
+}
+
+/* Иконка избранного */
+.movieFavorites .movieCard .movieCardPoster::before {
+  content: '❤️';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 1.2rem;
+  z-index: 2;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.movieFavorites .movieCard:hover .movieCardPoster::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .movieFavorites {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .movieFavorites:empty::after {
+    font-size: 1rem;
+  }
+
+  .movieFavorites .movieCard .movieCardPoster::before {
+    font-size: 1rem;
+    top: 10px;
+    right: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .movieFavorites {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .movieFavorites:empty::after {
+    font-size: 0.9rem;
+    max-width: 80vw;
+  }
+
+  .movieFavorites .movieCard .movieCardPoster::before {
+    font-size: 0.9rem;
+    top: 8px;
+    right: 8px;
+  }
+}
+
+/* Темная тема оптимизации */
+@media (prefers-color-scheme: dark) {
+  .movieFavorites {
+    background: linear-gradient(135deg, rgba(220, 20, 60, 0.08) 0%, rgba(0, 0, 0, 0.95) 50%, rgba(220, 20, 60, 0.03) 100%);
+  }
+}
+
+/* Оптимизация производительности */
+.movieFavorites {
+  contain: layout style paint;
+}
+
+.movieFavorites .movieCard {
+  will-change: transform;
+}
+
+.movieFavorites .movieCard:hover {
+  will-change: transform, box-shadow, border-color;
+}

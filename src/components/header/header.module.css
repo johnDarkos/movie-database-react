@@ -1,24 +1,42 @@
+:root {
+  /* Размеры хедера */
+  --header-height: 80px;
+  --header-height-mobile: 70px;
+  --header-padding: 0 2rem;
+  --header-padding-mobile: 0 1rem;
+
+  /* Цвета хедера */
+  --header-bg: linear-gradient(135deg, #000 0%, #111 50%, #222 100%);
+  --header-bg-mobile: linear-gradient(135deg, #000 0%, #0f0f0f 100%);
+  --header-bg-tablet: linear-gradient(135deg, #000 0%, #0a0a0a 100%);
+
+  /* Градиенты и эффекты */
+  --header-radial-gradient: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.03) 0%, transparent 50%), radial-gradient(circle at 40% 80%, rgba(220, 20, 60, 0.02) 0%, transparent 50%);
+  --header-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+  --header-border: 2px solid rgba(220, 20, 60, 0.3);
+
+  /* Навигация */
+  --nav-gap: 2rem;
+  --nav-gap-mobile: 0.5rem;
+  --nav-gap-tablet: 0.3rem;
+}
+
 .header {
     width: 100%;
-    height: 80px;
-    background: linear-gradient(135deg, #000 0%, #111 50%, #222 100%);
-    background-image:
-        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 40% 80%, rgba(220, 20, 60, 0.02) 0%, transparent 50%);
-    box-shadow:
-        0 4px 20px rgba(0, 0, 0, 0.8),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+    height: var(--header-height);
+    min-height: var(--header-height);
+    background: var(--header-bg);
+    background-image: var(--header-radial-gradient);
+    box-shadow: var(--header-box-shadow);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 2rem;
+    padding: var(--header-padding);
     position: sticky;
     top: 0;
     z-index: 1000;
     backdrop-filter: blur(2px) contrast(1.2) brightness(0.9);
-    border-bottom: 2px solid rgba(220, 20, 60, 0.3);
+    border-bottom: var(--header-border);
     position: relative;
 }
 
@@ -41,16 +59,30 @@
     opacity: 0.3;
 }
 
-.searchContainer {
-    flex: 1;
+.controlsContainer {
+    flex: 0 0 auto;
     display: flex;
     justify-content: flex-end;
-    max-width: 400px;
+    align-items: center;
+    gap: 1rem;
+}
+
+.filtersContainer {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+    flex: 0 1 700px;
+    max-width: 700px;
 }
 
 .headerNavigation {
     display: flex;
-    gap: 2rem;
+    gap: var(--nav-gap);
     align-items: center;
     list-style: none;
     padding: 0;
@@ -130,14 +162,15 @@
 
 /* Responsive design */
 @media (max-width: 768px) {
-    .header {
-        padding: 0 1rem;
-        height: 70px;
-        background: linear-gradient(135deg, #000 0%, #0f0f0f 100%);
+    :root {
+        --header-bg: var(--header-bg-mobile);
+        --nav-gap: var(--nav-gap-mobile);
     }
 
-    .headerNavigation {
-        gap: 0.5rem;
+    .header {
+        padding: var(--header-padding-mobile);
+        height: var(--header-height-mobile);
+        min-height: var(--header-height-mobile);
     }
 
     .headerNavigation a {
@@ -149,19 +182,22 @@
 }
 
 @media (max-width: 480px) {
+    :root {
+        --header-bg: var(--header-bg-tablet);
+        --nav-gap: var(--nav-gap-tablet);
+    }
+
     .header {
         flex-direction: column;
         height: auto;
         padding: 1rem;
         gap: 1rem;
-        background: linear-gradient(135deg, #000 0%, #0a0a0a 100%);
         border-bottom: 1px solid rgba(220, 20, 60, 0.2);
     }
 
     .headerNavigation {
         order: 2;
         justify-content: center;
-        gap: 0.3rem;
     }
 
     .headerNavigation a {

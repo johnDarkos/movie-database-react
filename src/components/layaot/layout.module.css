@@ -1,18 +1,40 @@
+:root {
+  /* Цвета фона */
+  --layout-bg: linear-gradient(135deg, #000 0%, #111 50%, #222 100%);
+  --layout-bg-mobile: linear-gradient(135deg, #000 0%, #0f0f0f 100%);
+
+  /* Отступы */
+  --layout-padding-vertical: 2rem;
+  --layout-padding-mobile: 1rem;
+
+  /* Размеры */
+  --layout-min-height: 100vh;
+  --header-height: 80px;
+  --header-height-mobile: 70px;
+  --content-min-height: calc(var(--layout-min-height) - var(--header-height));
+  --content-min-height-mobile: calc(var(--layout-min-height) - var(--header-height-mobile));
+}
+
 .layout {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #000 0%, #111 50%, #222 100%);
+  min-height: var(--layout-min-height);
+  background: var(--layout-bg);
   background-attachment: fixed;
 }
 
 .mainContent {
-  padding: 2rem 0;
-  min-height: calc(100vh - 80px); /* Вычитаем высоту header */
+  padding: var(--layout-padding-vertical) 0;
+  min-height: var(--content-min-height);
+  overflow-anchor: none;
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
+  :root {
+    --layout-bg: var(--layout-bg-mobile);
+  }
+
   .mainContent {
-    padding: 1rem 0;
-    min-height: calc(100vh - 70px);
+    padding: var(--layout-padding-mobile) 0;
+    min-height: var(--content-min-height-mobile);
   }
 }

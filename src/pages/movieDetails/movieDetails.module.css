@@ -41,6 +41,8 @@
 .movieDetailsPlot {
   max-width: 600px;
   line-height: 1.6;
+  text-align: center;
+  margin: 0 auto;
 }
 
 /* Responsive design */

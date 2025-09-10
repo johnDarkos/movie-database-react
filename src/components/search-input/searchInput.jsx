@@ -2,8 +2,8 @@ import styles from "./searchInput.module.css";
 import { useStorageMovies } from "@/store/useStorageMovies";
 import { getMovieByName } from "@/services/api/getMovieByName";
 import { useOmdbMoviesApi } from "@/services/api/OMDB/useOmdbApi";
-import { Button } from "@/components/button/button";
-import { useState } from "react";
+import { Button } from "../button/movie-search/button";
+import { useState, useCallback } from "react";
 
 /**
  * Компонент SearchInput для поиска фильмов
@@ -14,35 +14,43 @@ import { useState } from "react";
 
 
 export const SearchInput = (props) => {
-  const { searchMoviesByName, updateDataMovies, getMovies, clearMovies, setLoading, isLoading } = useStorageMovies();
+  const { searchMoviesByName, updateDataMovies, getMovies, clearMovies, setLoading, isLoading, filterMovies } = useStorageMovies();
   const [searchValue, setSearchValue ] = useState("");
 
   // Функция для обработки поиска
-  const handleSearch = async () => {
+  const handleSearch = useCallback(async () => {
     if (!searchValue.trim()) return;
-    
+
     clearMovies();
     setLoading(true);
     searchMoviesByName(searchValue);
-    
+
     try {
-      const response = await getMovieByName(useOmdbMoviesApi, searchValue, { type: 'movie', plot: 'short' });
+      // Учитываем выбранный фильтр при поиске
+      const searchType = filterMovies === 'all' ? undefined : filterMovies;
+      const response = await getMovieByName(useOmdbMoviesApi, searchValue, {
+        type: searchType,
+        plot: 'short'
+      });
       const movies = response.Search || [];
       updateDataMovies(movies);
-      console.log(response);
-      console.log(getMovies());
     } catch (err) {
       console.error("Ошибка поиска:", err);
       setLoading(false);
     }
-  };
+  }, [searchValue, filterMovies, clearMovies, setLoading, searchMoviesByName, updateDataMovies]);
 
   // Обработчик нажатия Enter в инпуте
-  const handleKeyPress = (e) => {
+  const handleKeyPress = useCallback((e) => {
     if (e.key === 'Enter') {
       handleSearch();
     }
-  };
+  }, [handleSearch]);
+
+  // Обработчик изменения значения инпута
+  const handleInputChange = useCallback((e) => {
+    setSearchValue(e.target.value);
+  }, []);
 
   return (
     <div className={styles.searchMovieContainer}>
@@ -51,7 +59,7 @@ export const SearchInput = (props) => {
         type="search"
         placeholder={props.placeholder}
         value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
+        onChange={handleInputChange}
         onKeyPress={handleKeyPress}
       />
       <Button 

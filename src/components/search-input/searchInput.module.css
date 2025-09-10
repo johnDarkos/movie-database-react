@@ -1,32 +1,62 @@
+:root {
+  /* Размеры инпута */
+  --search-input-width: 300px;
+  --search-input-height: 45px;
+  --search-input-width-focus: 350px;
+  --search-input-mobile-width: 240px;
+  --search-input-mobile-focus-width: 270px;
+  --search-input-tablet-width: 100%;
+  --search-input-tablet-max-width: 280px;
+  --search-input-tablet-focus-max-width: 300px;
+
+  /* Цвета и эффекты */
+  --search-input-border: 2px solid rgba(220, 20, 60, 0.3);
+  --search-input-bg: rgba(0, 0, 0, 0.7);
+  --search-input-bg-focus: rgba(0, 0, 0, 0.8);
+  --search-input-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(220, 20, 60, 0.1);
+  --search-input-shadow-focus: inset 0 2px 4px rgba(0, 0, 0, 0.7), 0 6px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(220, 20, 60, 0.4);
+
+  /* Типографика */
+  --search-input-font-size: 1rem;
+  --search-input-font-weight: 500;
+  --search-input-letter-spacing: 0.5px;
+  --search-input-mobile-font-size: 0.9rem;
+  --search-input-tablet-font-size: 0.85rem;
+}
+
 .searchMovieContainer {
     display: flex;
     align-items: center;
     position: relative;
     gap: 0;
     width: fit-content;
+    white-space: nowrap;
+    flex: 0 0 auto;
 }
 
 .searchInputMovie {
-    width: 300px;
-    height: 45px;
+    width: var(--search-input-width);
+    height: var(--search-input-height);
     padding: 0 1rem;
-    border: 2px solid rgba(220, 20, 60, 0.3);
+    border: var(--search-input-border);
     border-radius: 0;
-    background: rgba(0, 0, 0, 0.7);
+    border-right: none;
+    background: var(--search-input-bg);
     backdrop-filter: blur(1px) contrast(1.1);
     color: #ffffff;
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: var(--search-input-font-size);
+    font-weight: var(--search-input-font-weight);
     font-family: 'Courier New', monospace;
     outline: none;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow:
-        inset 0 2px 4px rgba(0, 0, 0, 0.5),
-        0 4px 15px rgba(0, 0, 0, 0.3),
-        0 0 10px rgba(220, 20, 60, 0.1);
+    transition:
+        border-color 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+    box-shadow: var(--search-input-shadow);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: var(--search-input-letter-spacing);
     text-shadow: 0 0 3px rgba(255, 255, 255, 0.3);
+    will-change: border-color, background;
 }
 
 .searchInputMovie::placeholder {
@@ -38,14 +68,9 @@
 }
 
 .searchInputMovie:focus {
-    width: 350px;
     border-color: #dc143c;
-    background: rgba(0, 0, 0, 0.8);
-    box-shadow:
-        inset 0 2px 4px rgba(0, 0, 0, 0.7),
-        0 6px 25px rgba(0, 0, 0, 0.4),
-        0 0 20px rgba(220, 20, 60, 0.4);
-    transform: translateY(-2px);
+    background: var(--search-input-bg-focus);
+    box-shadow: var(--search-input-shadow-focus);
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
     border-right: none;
 }
@@ -57,22 +82,26 @@
         inset 0 2px 4px rgba(0, 0, 0, 0.6),
         0 5px 18px rgba(0, 0, 0, 0.35),
         0 0 12px rgba(220, 20, 60, 0.2);
+    will-change: border-color, background, box-shadow;
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
-    .searchInputMovie {
-        width: 240px;
-        font-size: 0.9rem;
-        letter-spacing: 0.3px;
+    :root {
+        --search-input-font-size: var(--search-input-mobile-font-size);
     }
 
-    .searchInputMovie:focus {
-        width: 270px;
+    .searchInputMovie {
+        width: var(--search-input-mobile-width);
+        letter-spacing: 0.3px;
     }
 }
 
 @media (max-width: 480px) {
+    :root {
+        --search-input-font-size: var(--search-input-tablet-font-size);
+    }
+
     .searchMovieContainer {
         width: 100%;
         margin-left: 0;
@@ -82,17 +111,16 @@
     }
 
     .searchInputMovie {
-        width: 100%;
-        max-width: 280px;
-        font-size: 0.85rem;
+        width: var(--search-input-tablet-width);
+        max-width: var(--search-input-tablet-max-width);
         letter-spacing: 0.2px;
         height: 40px;
         border-right: 2px solid rgba(220, 20, 60, 0.3);
     }
 
     .searchInputMovie:focus {
-        width: 100%;
-        max-width: 300px;
+        width: var(--search-input-tablet-width);
+        max-width: var(--search-input-tablet-focus-max-width);
         border-right: 2px solid #dc143c;
     }
 }

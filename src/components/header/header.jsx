@@ -1,11 +1,12 @@
 import { SearchInput } from "../search-input/searchInput";
-import { useState, useEffect } from "react";
+import { Checkbox } from "../checkbox/Checkbox";
+import { useState, useEffect, memo } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import styles from "./header.module.css";
 import { NAV_ITEMS } from "@/constants/constants";
 
 
-export const Header = (props) => {
+export const Header = memo((props) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -45,9 +46,14 @@ export const Header = (props) => {
         ))}
       </nav>
 
-      <div className={`${styles.searchContainer} slide-in-right`}>
-        <SearchInput placeholder="найти фильм" />
+      <div className={`${styles.controlsContainer} slide-in-right`}>
+        <div className={styles.filtersContainer}>
+          <Checkbox />
+        </div>
+        <div className={styles.searchContainer}>
+          <SearchInput placeholder="найти фильм" />
+        </div>
       </div>
     </header>
   );
-};
+});

@@ -1,0 +1,137 @@
+:root {
+  /* Цвета для страницы избранного */
+  --favorites-page-bg: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(220, 20, 60, 0.05) 50%, rgba(0, 0, 0, 0.9) 100%);
+  --favorites-title-color: #ffffff;
+  --favorites-title-shadow: 0 0 20px rgba(220, 20, 60, 0.3);
+
+  /* Размеры */
+  --favorites-page-padding: 2rem;
+  --favorites-title-font-size: 2.5rem;
+  --favorites-title-margin: 2rem 0 3rem 0;
+  --favorites-page-min-height: 100vh;
+
+  /* Анимации */
+  --favorites-title-animation: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Основной контейнер страницы */
+.favorites {
+  min-height: auto; /* избегаем двойного 100vh внутри main */
+  background: var(--favorites-page-bg);
+  padding: var(--favorites-page-padding);
+  position: relative;
+  overflow-x: hidden;
+  overflow-anchor: none; /* предотвращаем скачок из-за scroll anchoring */
+}
+
+/* Заголовок страницы */
+.favorites h1 {
+  font-size: var(--favorites-title-font-size);
+  font-weight: 900;
+  color: var(--favorites-title-color);
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: var(--favorites-title-margin);
+  text-shadow: var(--favorites-title-shadow);
+  animation: titleSlideIn var(--favorites-title-animation);
+  position: relative;
+}
+
+.favorites h1::before {
+  content: '⭐ ';
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+.favorites h1::after {
+  content: ' ⭐';
+  animation: sparkle 2s ease-in-out infinite 1s;
+}
+
+/* Анимации */
+@keyframes titleSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  25% {
+    transform: scale(1.2) rotate(90deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.3) rotate(180deg);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(1.1) rotate(270deg);
+    opacity: 0.9;
+  }
+}
+
+/* Декоративные элементы */
+.favorites::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(220, 20, 60, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(220, 20, 60, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  :root {
+    --favorites-title-font-size: 2rem;
+    --favorites-title-margin: 1.5rem 0 2rem 0;
+    --favorites-page-padding: 1.5rem;
+  }
+
+  .favorites h1 {
+    font-size: var(--favorites-title-font-size);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --favorites-title-font-size: 1.8rem;
+    --favorites-title-margin: 1rem 0 1.5rem 0;
+    --favorites-page-padding: 1rem;
+  }
+
+  .favorites h1 {
+    font-size: var(--favorites-title-font-size);
+  }
+}
+
+/* Темная тема оптимизации */
+@media (prefers-color-scheme: dark) {
+  .favorites {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.98) 0%, rgba(220, 20, 60, 0.03) 50%, rgba(0, 0, 0, 0.95) 100%);
+  }
+}
+
+/* Оптимизация производительности */
+.favorites {
+  contain: layout style paint;
+}
+
+.favorites h1 {
+  will-change: transform, opacity;
+}

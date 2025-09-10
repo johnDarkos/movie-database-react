@@ -1,0 +1,191 @@
+:root {
+  /* Размеры чекбокса */
+  --checkbox-padding: 1rem;
+  --checkbox-margin-left: 1rem;
+  --checkbox-margin-left-mobile: 0.5rem;
+  --checkbox-margin-left-tablet: 0.3rem;
+  --checkbox-gap: 1rem;
+  --checkbox-gap-mobile: 0.5rem;
+  --checkbox-gap-tablet: 0.3rem;
+  --checkbox-radius: 12px;
+
+  /* Цвета чекбокса */
+  --checkbox-bg: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
+  --checkbox-bg-mobile: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 100%);
+  --checkbox-border: 2px solid rgba(220, 20, 60, 0.3);
+  --checkbox-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(220, 20, 60, 0.1);
+
+  /* Элементы чекбокса */
+  --checkbox-input-size: 16px;
+  --checkbox-item-padding: 0.5rem 0.8rem;
+  --checkbox-item-padding-mobile: 0.4rem 0.6rem;
+  --checkbox-item-padding-tablet: 0.3rem 0.5rem;
+  --checkbox-font-size: 0.9rem;
+  --checkbox-font-size-mobile: 0.8rem;
+  --checkbox-font-size-tablet: 0.75rem;
+}
+
+.checkbox {
+  display: flex;
+  gap: var(--checkbox-gap);
+  align-items: center;
+  padding: var(--checkbox-padding);
+  margin-left: var(--checkbox-margin-left);
+  background: var(--checkbox-bg);
+  border: var(--checkbox-border);
+  border-radius: var(--checkbox-radius);
+  box-shadow: var(--checkbox-shadow);
+  backdrop-filter: blur(10px);
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.checkbox div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: var(--checkbox-item-padding);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s ease, border 0.3s ease, transform 0.2s ease;
+  will-change: transform, background;
+}
+
+.checkbox div:hover {
+  background: rgba(220, 20, 60, 0.1);
+  border: 1px solid rgba(220, 20, 60, 0.5);
+  transform: translateY(-2px);
+}
+
+.checkbox div:active {
+  transform: translateY(0);
+}
+
+.checkboxInput {
+  appearance: none;
+  width: var(--checkbox-input-size);
+  height: var(--checkbox-input-size);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  flex-shrink: 0;
+}
+
+.checkboxInput:checked {
+  border-color: rgb(220, 20, 60);
+  background: linear-gradient(135deg, rgba(220, 20, 60, 0.3), rgba(220, 20, 60, 0.5));
+  box-shadow:
+    0 0 0 4px rgba(220, 20, 60, 0.15),
+    inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.checkboxInput:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  background: #ffffff;
+  border-radius: 50%;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.checkboxInput:not(:checked)::after {
+  opacity: 0;
+}
+
+.checkboxInput:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(220, 20, 60, 0.2),
+    0 0 6px rgba(255, 255, 255, 0.1);
+}
+
+.checkbox label {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  font-size: var(--checkbox-font-size);
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+.checkbox div:hover label {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+/* Активный элемент */
+.checkbox div.active {
+  background: rgba(220, 20, 60, 0.2);
+  border: 1px solid rgba(220, 20, 60, 0.8);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(220, 20, 60, 0.3);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+.checkbox div.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(220, 20, 60, 0.4), transparent);
+  animation: shimmer 0.8s ease-in-out;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  :root {
+    --checkbox-bg: var(--checkbox-bg-mobile);
+    --checkbox-gap: var(--checkbox-gap-mobile);
+    --checkbox-margin-left: var(--checkbox-margin-left-mobile);
+    --checkbox-item-padding: var(--checkbox-item-padding-mobile);
+    --checkbox-font-size: var(--checkbox-font-size-mobile);
+  }
+
+  .checkbox {
+    flex-direction: column;
+    padding: 0.8rem;
+  }
+
+  .checkbox div {
+    letter-spacing: 0.3px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --checkbox-gap: var(--checkbox-gap-tablet);
+    --checkbox-margin-left: var(--checkbox-margin-left-tablet);
+    --checkbox-item-padding: var(--checkbox-item-padding-tablet);
+    --checkbox-font-size: var(--checkbox-font-size-tablet);
+  }
+
+  .checkbox {
+    padding: 0.6rem;
+  }
+
+  .checkbox div {
+    letter-spacing: 0.2px;
+  }
+}

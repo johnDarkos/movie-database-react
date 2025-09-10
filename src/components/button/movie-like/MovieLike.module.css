@@ -1,0 +1,52 @@
+.likeButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 160ms ease, transform 100ms ease, box-shadow 160ms ease;
+}
+
+.likeButton:hover {
+  background-color: rgba(255, 71, 87, 0.12);
+}
+
+.likeButton:active {
+  transform: scale(0.96);
+}
+
+.likeButton:focus { outline: none; }
+.likeButton:focus-visible { outline: none; box-shadow: none; }
+
+.likeButton[aria-pressed="true"] {
+  background-color: rgba(255, 71, 87, 0.18);
+}
+
+.heartIcon {
+  width: 24px;
+  height: 24px;
+  transition: transform 140ms ease, filter 180ms ease, color 160ms ease;
+  color: #ff4757;
+}
+
+/* Hover подсветка для неактивного состояния (контур) */
+.likeButton:not([aria-pressed="true"]):hover .heartIcon {
+  filter: drop-shadow(0 1px 4px rgba(255, 71, 87, 0.35));
+}
+
+.likeButton[aria-pressed="true"] .heartIcon {
+  transform: scale(1.08);
+  filter: drop-shadow(0 1px 6px rgba(255, 71, 87, 0.45));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .likeButton,
+  .heartIcon {
+    transition: none;
+  }
+}

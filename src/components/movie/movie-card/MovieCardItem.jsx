@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { MovieLike } from "@/components/button/movie-like/MovieLike";
 import styles from "./MovieCard.module.css";
 
 /**
@@ -17,7 +18,7 @@ export const MovieCardItem = ({ Title, Year, Type, Poster, imdbID, className = "
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
   const navigate = useNavigate();
-  
+ 
   const handleImageLoad = () => {
     setImageLoaded(true);
   };
@@ -58,6 +59,7 @@ export const MovieCardItem = ({ Title, Year, Type, Poster, imdbID, className = "
             <span className={styles.movieCardType}>{Type}</span>
           </div>
         </div>
+        <MovieLike movie={{ imdbID, Title, Year, Type, Poster }} />
       </div>
     </div>
   );
